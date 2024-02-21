@@ -23,3 +23,11 @@ development:
 test:
   <<: *default
   database: barangay-platform_test
+
+production:
+  <<: *default
+  database: <%= ENV.fetch("PGDATABASE") %>
+  host: <%= ENV.fetch("PGHOST") %>
+  username: <%= ENV.fetch("PGUSERNAME") %>
+  password: <%= ENV.fetch("PGPASSWORD") %>
+  port: 5432
