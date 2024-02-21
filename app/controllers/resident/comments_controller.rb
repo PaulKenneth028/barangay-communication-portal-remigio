@@ -14,7 +14,7 @@ class Resident::CommentsController < ApplicationController
         def destroy
           @comment = current_user.comments.find(params[:id])
           @comment.destroy
-          flash[:notice] = "Comment deleted successfully."
+          flash[:confirm] = "Are you sure you want to delete this comment?"
           redirect_back(fallback_location: root_path)
         rescue ActiveRecord::RecordNotFound
           flash[:alert] = "Comment not found."

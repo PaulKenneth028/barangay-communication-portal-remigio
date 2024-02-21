@@ -108,31 +108,24 @@
   </div>
 </div>
 
-
 <script>
-  let toggleButtons = document.querySelectorAll('.toggle-comments-btn');
-
-  toggleButtons.forEach(function(button) {
-    button.addEventListener('click', function() {
-      let postId = this.getAttribute('data-post-id');
+document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('click', function(event) {
+    if (event.target.matches('.toggle-comments-btn')) {
+      let button = event.target;
+      let postId = button.getAttribute('data-post-id');
       let commentsContainer = document.getElementById('commentsContainer-' + postId);
       let commentsTitle = document.querySelector('.comments-title');
       commentsContainer.classList.toggle('hidden');
       commentsTitle.classList.toggle('hidden'); // Toggle comments title visibility
-      let commentCount = parseInt(this.getAttribute('data-comment-count'));
-      let likeCount = parseInt(this.getAttribute('data-like-count'));
+      let commentCount = parseInt(button.getAttribute('data-comment-count'));
       if (commentsContainer.classList.contains('hidden')) {
-        this.textContent = 'See all ' + commentCount + ' comments';
+        button.textContent = 'See all ' + commentCount + ' comments';
       } else {
-        this.textContent = 'Hide comments';
+        button.textContent = 'Hide comments';
       }
-    });
-  });
-
-  let commentBtns = document.querySelectorAll(".comment-btn");
-  commentBtns.forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      let postId = this.getAttribute("data-post-id");
+    } else if (event.target.matches('.comment-btn')) {
+      let postId = event.target.getAttribute("data-post-id");
       let modal = document.getElementById("commentModal-" + postId);
       modal.style.display = "block";
 
@@ -146,6 +139,7 @@
           modal.style.display = "none";
         }
       });
-    });
+    }
   });
+});
 </script>
