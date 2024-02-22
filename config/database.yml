@@ -15,20 +15,15 @@ default: &default
 
 development:
   <<: *default
-  database: barangay-platform_development
+  database: barangay-communication-portal_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: barangay-platform_test
+  database: barangay-communication-portal_test
 
 production:
   <<: *default
-  database: <%= ENV.fetch("PGDATABASE") %>
-  host: <%= ENV.fetch("PGHOST") %>
-  username: <%= ENV.fetch("PGUSERNAME") %>
-  password: <%= ENV.fetch("PGPASSWORD") %>
-  port: 5432
-  
+  database: barangay-communication-portal_production
