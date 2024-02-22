@@ -108,28 +108,35 @@
   </div>
 </div>
 
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  document.addEventListener('click', function(event) {
-    if (event.target.matches('.toggle-comments-btn')) {
-      let button = event.target;
-      let postId = button.getAttribute('data-post-id');
-      let commentsContainer = document.getElementById('commentsContainer-' + postId);
-      let commentsTitle = document.querySelector('.comments-title');
+  var toggleButtons = document.querySelectorAll('.toggle-comments-btn');
+
+  toggleButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      var postId = this.getAttribute('data-post-id');
+      var commentsContainer = document.getElementById('commentsContainer-' + postId);
+      var commentsTitle = document.querySelector('.comments-title');
       commentsContainer.classList.toggle('hidden');
       commentsTitle.classList.toggle('hidden'); // Toggle comments title visibility
-      let commentCount = parseInt(button.getAttribute('data-comment-count'));
+      var commentCount = parseInt(this.getAttribute('data-comment-count'));
+      var likeCount = parseInt(this.getAttribute('data-like-count'));
       if (commentsContainer.classList.contains('hidden')) {
-        button.textContent = 'See all ' + commentCount + ' comments';
+        this.textContent = 'See all ' + commentCount + ' comments';
       } else {
-        button.textContent = 'Hide comments';
+        this.textContent = 'Hide comments';
       }
-    } else if (event.target.matches('.comment-btn')) {
-      let postId = event.target.getAttribute("data-post-id");
-      let modal = document.getElementById("commentModal-" + postId);
+    });
+  });
+
+  var commentBtns = document.querySelectorAll(".comment-btn");
+  commentBtns.forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      var postId = this.getAttribute("data-post-id");
+      var modal = document.getElementById("commentModal-" + postId);
       modal.style.display = "block";
 
-      let span = modal.querySelector(".comment-close");
+      var span = modal.querySelector(".comment-close");
       span.addEventListener("click", function() {
         modal.style.display = "none";
       });
@@ -139,7 +146,6 @@ document.addEventListener('DOMContentLoaded', function() {
           modal.style.display = "none";
         }
       });
-    }
+    });
   });
-});
 </script>
